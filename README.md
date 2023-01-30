@@ -1,9 +1,10 @@
 Substantive Research Technical Task
 To start do the following:
 
-1. yarn (or npm} install;
-2. yarn (or npm) run start;
-3. This should automatically open a new window on your browser if not go to http://localhost:3000 on your browser
+1. git clone https://github.com/DiUrban/substantive-research-technical-task.git
+2. yarn (or npm} install;
+3. yarn (or npm) run start;
+4. This should automatically open a new window on your browser if not go to http://localhost:3000 on your browser
 
 Pre-build planning:
 Create a fetch function to retrieve interaction from Api (statically load?)
