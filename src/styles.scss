@@ -1,0 +1,246 @@
+$main-hue: 225;
+$main-color: hsl($main-hue, 30%, 70%, 1);
+$text-color: hsl($main-hue, 10%, 10%, 1);
+$text-shadow: hsl($main-hue, 50%, 25%, 0.5);
+$main-white: hsl($main-hue, 25%, 95%, 1);
+$small-size: 1280px;
+$tablet-size: 768px;
+$mobile-size: 480px;
+@mixin box-size() {
+  @media screen and (min-width: $small-size) {
+    $box-size: 1000px;
+    height: 0.6 * $box-size;
+    width: $box-size;
+  }
+  @media screen and (max-width: $small-size) {
+    $box-size: 700px;
+    height: 0.85 * $box-size;
+    width: $box-size;
+  }
+
+  @media screen and (max-width: $tablet-size) {
+    $box-size: 440px;
+    height: 1.1 * $box-size;
+    width: $box-size;
+  }
+  @media screen and (max-width: $mobile-size) {
+    $box-size: 300px;
+    height: 1.35 * $box-size;
+    width: $box-size;
+  }
+}
+@mixin sidebar-size() {
+  @media screen and (min-width: $small-size) {
+    font-size: large;
+    padding: 20px 5px 20px 10px;
+  }
+  @media screen and (max-width: $small-size) {
+    font-size: medium;
+    padding: 20px 5px 20px 5px;
+  }
+
+  @media screen and (max-width: $tablet-size) {
+    font-size: small;
+    padding: 10px 2px 10px 2px;
+    margin-right: 5px;
+  }
+  @media screen and (max-width: $mobile-size) {
+    font-size: x-small;
+    padding: 1px 2px 2px 1px;
+    margin-right: 10px;
+  }
+}
+
+.App {
+  display: grid;
+  grid-template-columns: repeat(1fr, 3);
+  grid-template-rows: repeat(1fr, 3);
+  height: 100vh;
+  width: 100vw;
+  background-color: grey;
+  overflow: hidden;
+  .AppWrapper {
+    @include box-size;
+    position: relative;
+    display: grid;
+    place-items: center;
+    background-color: whitesmoke;
+    grid-column: 2;
+    grid-row: 2;
+    grid-template-columns: repeat(1fr, 3);
+    border: 1px solid;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 15px;
+    color: $text-color;
+    .sidebarWrapper {
+      overflow-y: scroll;
+      height: 100%;
+      .sidebar {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-direction: column;
+        height: min-content;
+        width: 100%;
+        grid-column: 1;
+        @media screen and (max-width: $mobile-size) {
+          grid-column: 2;
+        }
+        .button {
+          @include sidebar-size;
+          position: relative;
+          height: min-content;
+          color: $text-color;
+          display: flex;
+          justify-content: start;
+          align-items: center;
+          padding: 40px;
+          background-color: $main-color;
+          border-radius: 2px;
+          border: 1px solid $text-shadow;
+          display: flex;
+          cursor: pointer;
+          color: $text-color;
+          text-decoration: none;
+          text-shadow: 0px 1px 0px $text-shadow;
+          &::before {
+            content: "";
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            z-index: 1;
+            top: 0;
+            right: 0;
+            background-color: rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+          }
+          &:hover {
+            background-color: $text-shadow;
+          }
+          &:hover::before {
+            opacity: 0;
+            transform: scale(0.5, 0.5);
+          }
+          &:active {
+            background-color: $main-color;
+            transition: all 0.001s;
+          }
+          &:active::before {
+            background-color: rgba(200, 200, 200, 0.5);
+            opacity: 2;
+            transform: scale(1, 1.5);
+          }
+        }
+      }
+    }
+    .mainBody {
+      grid-column: 2/100;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      @media screen and (max-width: $mobile-size) {
+        width: 100%;
+      }
+      .body {
+        height: calc(100% - 50px);
+        width: 100%;
+        border: 1px solid black;
+        margin: -1px 1px -1px 1px;
+        max-width: 100%;
+        .graphicsWrapper {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100%;
+          width: 95%;
+          .graphics {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: inherit;
+            height: inherit;
+          }
+          .doughnut {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 80%;
+            height: 90%;
+          }
+          .radar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 75%;
+            height: 100%;
+            font-size: x-large;
+          }
+        }
+      }
+      .topbar {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        height: 50px;
+        justify-content: start;
+        align-items: flex-start;
+
+        .button {
+          height: 50px;
+          width: 100px;
+          position: relative;
+          color: $text-color;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          text-transform: capitalize;
+          background-color: $main-hue;
+          border-radius: 2px;
+          border: none;
+          display: flex;
+          cursor: pointer;
+          color: $text-color;
+          font-size: large;
+          padding: 20px 5px 20px 10px;
+          text-decoration: none;
+          text-shadow: 0px 1px 0px $text-shadow;
+          @media screen and (max-width: $mobile-size) {
+            padding: 10px 2px 10px 2px;
+            width: 60px;
+            font-size: small;
+          }
+          &::before {
+            content: "";
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            z-index: 1;
+            top: 0;
+            right: 0;
+            background-color: rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+          }
+          &:hover {
+            background-color: $text-shadow;
+          }
+          &:hover::before {
+            opacity: 0;
+            transform: scale(0.5, 0.5);
+          }
+          &:active {
+            background-color: $main-color;
+            transition: all 0.001s;
+          }
+          &:active::before {
+            background-color: rgba(200, 200, 200, 0.5);
+            opacity: 2;
+            transform: scale(1, 1.5);
+          }
+        }
+      }
+    }
+  }
+}
